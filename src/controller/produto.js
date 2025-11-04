@@ -14,8 +14,10 @@ class ControllerProduto {
 
   async PegarUm(req, res) {
     try {
+      const id = req.params.id;
+      const produto = await ServiceProduto.Pegarum(id);
 
-      res.status(200).send("Pegou um");
+      res.status(200).send({ produto });
     } catch (error) {
       res.status(500).send({ msg: error.message });
     }
@@ -23,12 +25,11 @@ class ControllerProduto {
 
   async Criar(req, res) {
     try {
-        const {nome, disponivel, quantidade} = req.body
+      const { nome, disponivel, quantidade } = req.body;
 
-        await ServiceProduto.Criar(nome, disponivel, quantidade)
+      await ServiceProduto.Criar(nome, disponivel, quantidade);
 
-      res.status(201).send("Criou Novo Produto");
-
+      res.status(201).send("Novo Produto Criado!");
     } catch (error) {
       res.status(500).send({ msg: error.message });
     }
@@ -36,12 +37,12 @@ class ControllerProduto {
 
   async Alterar(req, res) {
     try {
-        const id = req.params.id
-        const {nome, disponivel, quantidade} = req.body
+      const id = req.params.id;
+      const { nome, disponivel, quantidade } = req.body;
 
-        ServiceProduto.Alterar(id, nome, disponivel, quantidade)
+      ServiceProduto.Alterar(id, nome, disponivel, quantidade);
 
-      res.status(200).send("Alterou novo produto");
+      res.status(200).send("Produto alterado!");
     } catch (error) {
       res.status(500).send({ msg: error.message });
     }
@@ -49,7 +50,11 @@ class ControllerProduto {
 
   async Deletar(req, res) {
     try {
-      res.status(200).send("Deletou novo produto");
+      const id = req.params.id;
+
+      await ServiceProduto.Deletar(id);
+
+      res.status(200).send("Produto deletado!");
     } catch (error) {
       res.status(500).send({ msg: error.message });
     }

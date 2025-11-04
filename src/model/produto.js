@@ -14,11 +14,11 @@ class Produto {
       disponivel: {
         type: bancoDados.db.Sequelize.BOOLEAN,
       },
-      quantide: {
+      quantidade: {
         type: bancoDados.db.Sequelize.INTEGER,
-      }
+      },
     }); //o banco
   }
 }
 
-export default new Produto().model
+export default new Produto().model;

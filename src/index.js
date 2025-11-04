@@ -1,15 +1,15 @@
 import express from "express";
-import router from "./router/produto.js"
+import router from "./router/produto.js";
 import bancoDados from "./config/database.js";
 
 const app = express();
 
 app.use(express.json());
-app.use('/api/v1', router)
+app.use("/api/v1", router);
 
 const port = 3000;
 bancoDados.db
-  .sync({ force: false})
+  .sync({ force: false })
   .then(() => {
     app.listen(port, () => {
       console.log("Servidor rodando na porta: " + port);

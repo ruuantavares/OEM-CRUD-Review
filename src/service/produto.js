@@ -5,10 +5,26 @@ class ServiceProduto {
     return Produto.findAll();
   }
 
-  async Pegarum(id) {}
+  async Pegarum(id) {
+    if (!id) {
+      throw new Error("Favor informar um ID");
+    }
+
+    const produto = await Produto.findByPk(id);
+
+    if (!produto) {
+      throw new Error(`Produto ${id} não encontrado`);
+    }
+
+    return produto;
+  }
 
   async Criar(nome, disponivel, quantidade) {
-    Produto.create({
+    if (!nome || !disponivel || !quantidade) {
+      throw new Error("Favor Preencher todos os dados");
+    }
+
+    await Produto.create({
       nome,
       disponivel,
       quantidade,
@@ -31,7 +47,19 @@ class ServiceProduto {
     return produto.save();
   }
 
-  async Deletar(id) {}
+  async Deletar(id) {
+    if (!id) {
+      throw new Error("Favor informar um ID");
+    }
+
+    const produto = await Produto.findByPk(id);
+
+    if (!produto) {
+      throw new Error(`Produto ${id} não encontrado`);
+    }
+
+    return produto.destroy(id);
+  }
 }
 
 export default new ServiceProduto();
