@@ -44,7 +44,7 @@ class ServiceProduto {
     produtoVelho.disponivel = disponivel || produtoVelho.disponivel
     produtoVelho.quantidade = quantidade || produtoVelho.quantidade
 
-    return produto.save();
+    return produtoVelho.save();
   }
 
   async Deletar(id) {
